@@ -1,4 +1,4 @@
--- Section 1: Focus on JOINs (The Bridge).
+-- Focus on JOINs (The Bridge).
 -- 1 - The Ghost Customers: List all Customers who have never placed an order.
 
 -- most performatic query.
@@ -65,12 +65,3 @@ FROM category_mapping AS m
 INNER JOIN revenue_per_product AS r ON m.product_id = r.product_id
 GROUP BY m.category_name
 ORDER BY category_revenue DESC;
-
--- Section 2: Focus on Window Functions (The Magic Glass).
--- 4 - Cumulative RevenueShow each order's freight cost and a running total of freight paid by that specific customer.SUM(freight) OVER (PARTITION BY customer_id ORDER BY order_date).
--- 5 - The Price GapShow each product, its price, and the average price of its category in the same row.AVG(unit_price) OVER (PARTITION BY category_id).
--- 6 - The VIP FilterIdentify the Top 3 most expensive products within each Category.DENSE_RANK() OVER (PARTITION BY category_id ORDER BY unit_price DESC).
- 
--- Section 3: Advanced "Engineer" Level (Mixing Concepts).
--- 7 - The Top SalespersonFor each year, find the Employee who handled the most orders.You need to GROUP BY first, then RANK() over the result.
--- 8 - The Last Order LogicShow every customer and the Date of their most recent order without using MAX().Use ROW_NUMBER() to find the "latest" version of a record—a classic data cleaning task.
